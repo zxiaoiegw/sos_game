@@ -1,4 +1,4 @@
-package app;
+package sprint0;
 
 public class Main {
 
