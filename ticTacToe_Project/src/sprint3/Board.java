@@ -35,7 +35,7 @@ public class Board {
                 }
                 gameMode = new SimpleGameMode();    
             } else {
-                // Changed condition for general mode: must be between 4 and 8 inclusive
+                // Changed condition for general mode: must be between 4 -8
                 if (boardSize < 4 || boardSize > 8) {
                     boardSize = 8; // Default to 8x8 if input is invalid
                     JOptionPane.showMessageDialog(gui, "Invalid board size. Board size must be between 4-8. Defaulting to 8x8.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -80,30 +80,9 @@ public class Board {
                 gameMode = new SimpleGameMode();
             } else {
                 boardSize = 8;  // Default for general mode
-                JOptionPane.showMessageDialog(gui, "Invalid board size. Board size must be between 4x4 and 8x8. Defaulting to 8x8.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(gui, "Invalid board size. Board size must be between 4-8. Defaulting to 8x8.", "Error", JOptionPane.ERROR_MESSAGE);
                 gameMode = new GeneralGameMode(boardSize);
             }
-            
-            // Generate the board with default size
-            currentPlayer = "Blue";
-            gui.getBoardPanel().removeAll();
-            gui.getBoardPanel().setLayout(new GridLayout(boardSize, boardSize));
-
-            for (int row = 0; row < boardSize; row++) {
-                for (int col = 0; col < boardSize; col++) {
-                    GameButton button = new GameButton(" ");
-                    button.setFont(new Font("Arial", Font.BOLD, 35));
-                    int finalRow = row;
-                    int finalCol = col;
-                    button.addActionListener(e -> handleButtonClick(button, finalRow, finalCol));
-                    gui.getBoardPanel().add(button);
-                }
-            }
-
-            gui.getBoardPanel().revalidate();
-            gui.getBoardPanel().repaint();
-            gui.updateTurnLabel(currentPlayer);
-            gui.updateScores(0, 0);
         }
     }
 
