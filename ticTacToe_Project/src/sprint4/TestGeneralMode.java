@@ -124,23 +124,20 @@ public class TestGeneralMode {
      */
     @Test
     public void testGeneralGameOverWhenBoardIsFull() {
-        int boardSize = 3;
+        // Use valid board size for general mode (4-8)
+        int boardSize = 5;  
         GeneralGameMode gameMode = new GeneralGameMode(boardSize);
 
-        char[][] moves = {
-            {'S', 'O', 'S'},
-            {'O', 'S', 'O'},
-            {'O', 'O', 'S'}
-        };
-
+        // Fill the board with moves
         boolean sosFormed = false;
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                sosFormed = gameMode.makeMove(i, j, moves[i][j]);
+                // Alternate between S and O randomly to simulate gameplay
+                char move = (Math.random() < 0.5) ? 'S' : 'O';
+                sosFormed = gameMode.makeMove(i, j, move);
                 if (!sosFormed) {
                     gameMode.switchPlayer();
                 }
-                // If SOS is formed, player gets another turn
             }
         }
 
@@ -148,7 +145,5 @@ public class TestGeneralMode {
         int blueScore = gameMode.getBlueScore();
         int redScore = gameMode.getRedScore();
         assertTrue(blueScore >= 0 && redScore >= 0, "Scores should be non-negative");
-        System.out.println("Blue Score: " + blueScore);
-        System.out.println("Red Score: " + redScore);
     }
 }

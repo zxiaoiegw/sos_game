@@ -1,7 +1,7 @@
 package sprint4;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
@@ -25,10 +25,8 @@ public class TestSimpleMode {
         // Manually call updatePlayerControls to simulate disabling buttons
         gui.updatePlayerControls("Blue");
 
-        // Act
         gui.getBtnNewGame().doClick();
 
-        // Assert
         assertNotNull(board.getBlueComputer(), "Blue computer player should be initialized in simple mode");
         assertNull(board.getRedComputer(), "Red computer player should not be initialized in simple mode");
 
@@ -73,9 +71,11 @@ public class TestSimpleMode {
 
         // Blue (human) makes a move
         boolean sosFormed = gameMode.makeMove(0, 0, 'S');
-        assertFalse(sosFormed, "No SOS should be formed yet");
-        gameMode.switchPlayer();
         boardState[0][0] = 'S';
+        assertFalse(sosFormed, "No SOS should be formed yet");
+        if (!sosFormed) { 
+        	gameMode.switchPlayer();
+        }
 
         // Red (computer) makes a move
         ComputerPlayer.Move redMove = redComputer.makeMove(boardState);
